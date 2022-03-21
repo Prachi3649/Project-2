@@ -21,14 +21,21 @@ const internSchema = new mongoose.Schema({
 
         }
     },
-    mobile: {
-        type: String,
-        require:true,
-        unique:true,
-        trim:true,
-        match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/
+    // mobile: {
+    //     type: String,
+    //     require:true,
+    //     unique:true,
+    //     trim:true,
+    //     match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
 
-      },
+    //   },
+
+    
+   mobile: {
+      type: Number,
+  },
+
+
 
     collegeId: {
         type: ObjectId,
@@ -43,4 +50,28 @@ const internSchema = new mongoose.Schema({
  
 
 }, { timestamps: true })
+
+
+
+
+
+
+internSchema.path('mobile').validate(function validatePhone() {
+  return ( this.mobile > 999999999 );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = mongoose.model('Intern', internSchema)
