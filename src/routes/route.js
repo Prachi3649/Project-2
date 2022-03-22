@@ -7,9 +7,9 @@ const collegeController = require('../controllers/collegeController')
 
 router.post('/functionup/colleges', collegeController.createCollege_Doc)
 
-router.post('/functionup/interns', internController.internsName )
+router.post('/functionup/interns', internController.internsEntry )
 
-router.get('/functionup/collegeDetails', internController.collegeDetails)
+router.get('/functionup/collegeDetails', collegeController.collegeDetails)
 
 
 module.exports = router;

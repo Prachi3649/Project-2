@@ -11,7 +11,8 @@ const internSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        lowercase: true,
+         lowercase: true,
+       // uppercase:false,
         //validate: [ validator.isEmail, 'invalid email' ]
         validate: {
             validator: validator.isEmail,
@@ -21,26 +22,18 @@ const internSchema = new mongoose.Schema({
 
         }
     },
-    // mobile: {
-    //     type: String,
-    //     require:true,
-    //     unique:true,
-    //     trim:true,
-    //     match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
-
-    //   },
-
-    
    mobile: {
       type: Number,
+      required:true,
+      unique:true,
+      minlength: [10 , "plese provide valid 10 digit number"],
+      maxlength: [10 , "plese provide valid 10 digit number"]
+    
   },
-
-
-
     collegeId: {
         type: ObjectId,
         ref:'College',
-        trim:true,
+        required:true
     },
     
     isDeleted: {
@@ -57,7 +50,7 @@ const internSchema = new mongoose.Schema({
 
 
 internSchema.path('mobile').validate(function validatePhone() {
-  return ( this.mobile > 999999999 );
+  return ( this.mobile > 999999999 || this.mobile < 10000000000 );
 });
 
 
