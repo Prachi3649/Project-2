@@ -1,18 +1,18 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
-const ObjectId =mongoose.Schema.Types.ObjectId
+const ObjectId = mongoose.Schema.Types.ObjectId
 const internSchema = new mongoose.Schema({
     name: {
         type: String,
         required: "Inter name is required",
-        trim:true
+        trim: true
     },
     email: {
         type: String,
         required: true,
         unique: true,
-         lowercase: true,
-       // uppercase:false,
+        lowercase: true,
+        // uppercase:false,
         //validate: [ validator.isEmail, 'invalid email' ]
         validate: {
             validator: validator.isEmail,
@@ -22,25 +22,25 @@ const internSchema = new mongoose.Schema({
 
         }
     },
-   mobile: {
-      type: Number,
-      required:true,
-      unique:true,
-      minlength: [10 , "plese provide valid 10 digit number"],
-      maxlength: [10 , "plese provide valid 10 digit number"]
-    
-  },
+    mobile: {
+        type: Number,
+        required: true,
+        unique: true,
+        minlength: [10, "plese provide valid 10 digit number"],
+        maxlength: [10, "plese provide valid 10 digit number"]
+
+    },
     collegeId: {
         type: ObjectId,
-        ref:'College',
-        required:true
+        ref: 'College',
+        required: true
     },
-    
+
     isDeleted: {
         type: Boolean,
         default: false
     },
- 
+
 
 }, { timestamps: true })
 
@@ -50,7 +50,7 @@ const internSchema = new mongoose.Schema({
 
 
 internSchema.path('mobile').validate(function validatePhone() {
-  return ( this.mobile > 999999999 || this.mobile < 10000000000 );
+    return (this.mobile > 999999999 || this.mobile < 10000000000);
 });
 
 
