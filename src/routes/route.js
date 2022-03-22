@@ -11,5 +11,9 @@ router.post('/functionup/interns', internController.internsEntry )
 
 router.get('/functionup/collegeDetails', collegeController.collegeDetails)
 
+router.get("*", async function (req,res){
+    return res.status(404).send("ERROR! page not found")
+})
+
 
 module.exports = router;
