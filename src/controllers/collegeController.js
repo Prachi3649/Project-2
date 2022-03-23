@@ -4,6 +4,11 @@ const internModel =require("../models/internModel")
 
 const createCollege_Doc = async function (req, res) {
   try {
+
+    if(Object.keys(req.body).length <= 0){
+      return res.status(400).send({status:false, msg: "Bad Request please enter information about college"})
+    }
+
     const { name, fullName, logoLink } = req.body
     if (!name) {
       return res.status(400).send({ status: false, msg: "BAD REQUEST please provied valid name" })
@@ -38,16 +43,21 @@ const createCollege_Doc = async function (req, res) {
 
 const collegeDetails = async function(req, res){
   try{
+
+    if(Object.keys(req.query).length <= 0){
+      return res.status(400).send({status:false, msg: "Bad Request please give input as college name"})
+    }
      const collegeName = req.query.collegeName
 
      if(!collegeName){return res.status(400).send({status:false, msg:"BAD REQUEST please provied valid collegeName"})}
+
      const college =await collegeModel.find({ name:collegeName, isDeleted: false })
      
      
-     if (!college) {
+     if (!college || college.length <= 0) {
         return res.status(404).send({ status: false, msg: "BAD REQUEST  college not found" })
       }
-       console.log(college)
+       //console.log(college)
       const collegeId = college[0]._id
     //   delete req.body["collegeName"]
       
